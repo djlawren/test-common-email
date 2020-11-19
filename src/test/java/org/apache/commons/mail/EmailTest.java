@@ -42,6 +42,21 @@ public class EmailTest {
 		fail();	// Fail the test
 	}
 	
+	// Test the add list of emails to CC
+	@Test
+	public void testAddCc() throws Exception {
+		email.addCc(TEST_EMAILS);	// Add list of emails to CC
+		
+		assertEquals(3, email.getCcAddresses().size());	// Check if the count == 3
+	}
+	
+	// Test the exception on empty list
+	@Test(expected = EmailException.class)
+	public void testAddCcException() throws Exception {
+		email.addCc(EMPTY_LIST);	// Give it no emails
+		
+		fail();	// Fail the test
+	}
 	// Not really necessary to tear down anything
 	@After
 	public void tearDownEmailTest() throws Exception {
