@@ -90,6 +90,52 @@ public class EmailTest {
 		assertEquals(1, email.getReplyList().size());	// Check if there is one in the list
 	}
 
+	// Check for exception on building mime message twice
+	@Test(expected = IllegalStateException.class)
+	public void testBuildMimeMessageException() throws Exception {
+		email.setHostName("localhost");
+		
+		email.addTo("hello@hello.com");
+		email.addCc("hello@hello.com");
+		email.addBcc("hello@hello.com");
+		email.addHeader("Key", "Value");
+		email.addReplyTo("abc@acb.org", "Hello world", "");
+		email.setFrom("dasdaw@asdwasd.net", "Mmhmm", "");
+		
+		email.buildMimeMessage();	// Build once
+		email.buildMimeMessage();	// Build a second time to get the exception
+	}
+	
+	// Check correct usage of buildMimeMessage
+	@Test
+	public void testBuildMimeMessage() throws Exception {
+		email.setHostName("localhost");
+		
+		email.addTo("hello@hello.com");
+		email.addCc("hello@hello.com");
+		email.addBcc("hello@hello.com");
+		email.addHeader("Key", "Value");
+		email.addReplyTo("abc@acb.org", "Hello world", "");
+		email.setFrom("dasdaw@asdwasd.net", "Mmhmm", "");
+		email.setSubject("Subject line");
+		email.setContent(new MimeMultipart("Hello"));
+		email.setBounceAddress("hello@hello.com");
+		
+		email.buildMimeMessage();	// Build message after giving it sufficient values
+		
+		assertNotNull(email.getMimeMessage());	// Make sure it isn't null
+	}
+	
+	// Test buildMimeMessage without enough information
+	@Test(expected = EmailException.class)
+	public void testBuildMimeMessageEmailException() throws Exception {
+		email.setHostName("localhost");	// Set host name
+		
+		email.buildMimeMessage();	// Will fail because not enough details are set
+		
+		fail();	// Fail the test
+	}
+
 	// Not really necessary to tear down anything
 	@After
 	public void tearDownEmailTest() throws Exception {
