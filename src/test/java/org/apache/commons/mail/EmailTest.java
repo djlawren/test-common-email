@@ -57,6 +57,31 @@ public class EmailTest {
 		
 		fail();	// Fail the test
 	}
+
+	// Test the correct usage for add header
+	@Test
+	public void testAddHeader() throws Exception {
+		email.addHeader("Key", "Value");	// Give temp values 
+		
+		assertEquals(1, email.getHeaders().size());	// Check if there are one headers
+	}
+	
+	// Test the exception on no key given
+	@Test(expected = IllegalArgumentException.class)
+	public void testAddHeaderEmptyKey() throws Exception {
+		email.addHeader("", "Value");	// Give value but no key
+		
+		fail();	// Fail the test
+	}
+	
+	// Test the exception on no value given
+	@Test(expected = IllegalArgumentException.class)
+	public void testAddHeaderEmptyValue() throws Exception {
+		email.addHeader("Key", "");	// Give key but no value
+		
+		fail();	// Fail the test
+	}
+
 	// Not really necessary to tear down anything
 	@After
 	public void tearDownEmailTest() throws Exception {
