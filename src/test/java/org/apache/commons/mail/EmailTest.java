@@ -173,6 +173,14 @@ public class EmailTest {
 		assertNotNull(email.getSentDate());	// Assert it has been set
 	}
 
+	// Test the setFrom method
+	@Test
+	public void testSetFrom() throws Exception {
+		email.setFrom("test@test.com");	// Give a value from the test email
+		
+		assertNotNull(email.getFromAddress());	// Assert it is not null
+	}
+
 	// Not really necessary to tear down anything
 	@After
 	public void tearDownEmailTest() throws Exception {
