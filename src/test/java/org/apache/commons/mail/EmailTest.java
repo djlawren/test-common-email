@@ -157,6 +157,14 @@ public class EmailTest {
 		email.getMailSession();	// Never set up, so  should give issue
 	}
 
+	// Test the getSentDate method
+	@Test
+	public void testGetSentDate() throws Exception {
+		email.setSentDate(new Date()); // Give sent date
+		
+		assertNotNull(email.getSentDate());	// Assert it has been set
+	}
+
 	// Not really necessary to tear down anything
 	@After
 	public void tearDownEmailTest() throws Exception {
