@@ -151,6 +151,12 @@ public class EmailTest {
 		assertNull(email.getHostName());	// Was never set, so it will be null
 	}
 
+	// Test the exception on getting mail session without setting up
+	@Test(expected = EmailException.class)
+	public void testGetMailSession() throws Exception {
+		email.getMailSession();	// Never set up, so  should give issue
+	}
+
 	// Not really necessary to tear down anything
 	@After
 	public void tearDownEmailTest() throws Exception {
