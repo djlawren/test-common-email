@@ -157,6 +157,14 @@ public class EmailTest {
 		email.getMailSession();	// Never set up, so  should give issue
 	}
 
+	// Test the getSocketConnectionTimeout method
+	@Test
+	public void testGetSocketConnectionTimeout() throws Exception {
+		email.setSocketConnectionTimeout(1000);	// Set the value
+		
+		assertEquals(1000, email.getSocketConnectionTimeout());	// Check if it is equal
+	}
+
 	// Test the getSentDate method
 	@Test
 	public void testGetSentDate() throws Exception {
