@@ -82,6 +82,14 @@ public class EmailTest {
 		fail();	// Fail the test
 	}
 
+	// Test the addReplyTo method
+	@Test
+	public void testAddReplyTo() throws Exception {
+		email.addReplyTo("abc@acb.org", "Hello world", "");	// Add one reply to
+		
+		assertEquals(1, email.getReplyList().size());	// Check if there is one in the list
+	}
+
 	// Not really necessary to tear down anything
 	@After
 	public void tearDownEmailTest() throws Exception {
