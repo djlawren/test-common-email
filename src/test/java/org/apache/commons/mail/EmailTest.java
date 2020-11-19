@@ -136,6 +136,21 @@ public class EmailTest {
 		fail();	// Fail the test
 	}
 
+	// Test the getHostName method
+	@Test
+	public void testGetHostName() throws Exception {
+		email.setHostName("localhost");	// Set a host name
+		
+		assertNotNull(email.getHostName());	// Make sure it isn't null
+	}
+	
+	// Test the getHostName method without setting it first
+	@Test
+	public void testGetHostNameNull() throws Exception {
+		
+		assertNull(email.getHostName());	// Was never set, so it will be null
+	}
+
 	// Not really necessary to tear down anything
 	@After
 	public void tearDownEmailTest() throws Exception {
